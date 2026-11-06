@@ -2,15 +2,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.72"
     }
   }
 
   backend "s3" {
-    bucket         = "demo-terraform-eks-state-s3-bucket"
+    bucket         = "demo-terraform-eks-state-s3-bucket1"
     key            = "terraform.tfstate"
     region         = "us-west-2"
-    dynamodb_table = "terraform-eks-state-locks"
+    dynamodb_table = "terraform-eks-state-locks1"
     encrypt        = true
   }
 }
