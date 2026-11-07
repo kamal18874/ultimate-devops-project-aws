@@ -2,8 +2,12 @@ provider "aws" {
   region = "us-west-2"
 }
 
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "harekrishna12"
+  bucket = "harekrishna12-tf-state-${random_id.bucket_suffix.hex}"
 
   lifecycle {
     prevent_destroy = false
@@ -12,6 +16,7 @@ resource "aws_s3_bucket" "terraform_state" {
 
 resource "aws_s3_bucket_versioning" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id
+
   versioning_configuration {
     status = "Enabled"
   }
